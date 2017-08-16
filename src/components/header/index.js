@@ -31,7 +31,7 @@ const StyledHeader = styled.header`
   color: #fffefc;
   
   & .header-icon {
-    margin-right: 10px;
+    margin-right: 25px;
     cursor: pointer
   }
   

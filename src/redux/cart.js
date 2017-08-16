@@ -7,3 +7,7 @@ export default function cartReducer(state = initValues, action) {
       return state;
   }
 }
+
+export function addItemToCart(item) {
+
+}
