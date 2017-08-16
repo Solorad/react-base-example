@@ -12,6 +12,8 @@ import registerServiceWorker from "./registerServiceWorker";
 import reduxApp from "./redux";
 import reactTapSupport from "react-tap-event-plugin";
 
+import "./globalStyles";
+
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 reactTapSupport();
