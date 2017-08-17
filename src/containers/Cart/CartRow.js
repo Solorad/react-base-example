@@ -7,24 +7,22 @@ const CartRow = ({ cartItems, cartItem, updateCartItem, removeCartItem }) => {
   const item = cartItem.item;
   return (
     <tr>
-      <td>
-        <UpdateNumDiv>
+      <UpdateNumTd>
+        <div>
           <span
-            className="update-col icon"
+            className="plus-col"
             onClick={() => updateCartItem(cartItems, item, 1)}
           >
-            <i className="fa fa-plus fa-lg" aria-hidden="true" />
+            <i className="fa fa-plus icon" aria-hidden="true" />
           </span>
-          <span
-            className="update-col icon"
-            onClick={() => updateCartItem(cartItems, item, -1)}
+          <span className="minus-col" onClick={() => updateCartItem(cartItems, item, -1)}
           >
-            <i className="fa fa-minus fa-lg" aria-hidden="true" />
+            <i className="fa fa-minus icon" aria-hidden="true" />
           </span>
-        </UpdateNumDiv>
-      </td>
+        </div>
+      </UpdateNumTd>
       <td>
-        <i className="fa fa-leaf fa-2x" aria-hidden="true" />
+        <i className="fa fa-leaf fa-lg" aria-hidden="true" />
         {cartItem.quantity} qty.
       </td>
       <td>
@@ -37,17 +35,33 @@ const CartRow = ({ cartItems, cartItem, updateCartItem, removeCartItem }) => {
         <span>{item.weight}</span>
       </td>
       <td>
-        <span className="icon" onClick={() => removeCartItem(cartItems, item)}>
-          <i className="fa fa-trash-o fa-lg" aria-hidden="true" />
+        <span onClick={() => removeCartItem(cartItems, item)}>
+          <i className="fa fa-trash-o fa-lg icon" aria-hidden="true" />
         </span>
       </td>
     </tr>
   );
 };
 
-const UpdateNumDiv = styled.div`
+const UpdateNumTd = styled.td`
+  border-right: 1px solid #969494;
+  padding: 0;
+  
+  div {
     display: flex;
     flex-direction: column;
+  }
+    
+   .plus-col {
+      margin: 0 -10px;
+      border-bottom: 1px solid #969494;
+      text-align: center;
+      padding-bottom: 10px;
+   }
+   
+   .minus-col {
+      margin-top: 10px;
+   }
 `;
 
 CartRow.propTypes = {

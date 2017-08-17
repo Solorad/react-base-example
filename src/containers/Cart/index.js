@@ -15,21 +15,23 @@ const Cart = ({ cartItems, updateCartItem, removeCartItem }) => {
       <Container>
         <StyledContainer>
           <ProductList />
-          <table>
-            <tbody>
-              {cartItems.map(cartItem => {
-                return (
-                  <CartRow
-                    key={cartItem.id}
-                    cartItem={cartItem}
-                    cartItems={cartItems}
-                    updateCartItem={updateCartItem}
-                    removeCartItem={removeCartItem}
-                  />
-                );
-              })}
-            </tbody>
-          </table>
+          {cartItems && cartItems.length > 0
+            ? <StyledCartTable>
+                <tbody>
+                  {cartItems.map(cartItem => {
+                    return (
+                      <CartRow
+                        key={cartItem.id}
+                        cartItem={cartItem}
+                        cartItems={cartItems}
+                        updateCartItem={updateCartItem}
+                        removeCartItem={removeCartItem}
+                      />
+                    );
+                  })}
+                </tbody>
+              </StyledCartTable>
+            : null}
         </StyledContainer>
       </Container>
     </div>
@@ -40,14 +42,20 @@ const StyledContainer = styled.div`
   .icon {
     cursor: pointer;
     color: #669e3a;
-    margin-left: 5px;
   }
   .icon:hover {
      color: #578831;
   }
+`;
+
+const StyledCartTable = styled.table`
+  margin-top: 40px;
+  border: 1px solid #969494;
+  border-collapse: collapse;
   
-  table {
-    border: 1px solid #000;
+  td {
+    border-bottom: 1px solid #969494;
+    padding: 10px;
   }
 `;
 

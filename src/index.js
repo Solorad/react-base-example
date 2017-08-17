@@ -1,9 +1,10 @@
 import React from "react";
 import { render } from "react-dom";
-import { applyMiddleware, createStore } from "redux";
+import { applyMiddleware, compose, createStore } from "redux";
+import { persistStore, autoRehydrate } from "redux-persist";
+import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import { Provider } from "react-redux";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import { browserHistory, Router } from "react-router";
 import { routerMiddleware, syncHistoryWithStore } from "react-router-redux";
@@ -21,8 +22,14 @@ reactTapSupport();
 const store = createStore(
   reduxApp,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  applyMiddleware(routerMiddleware(browserHistory), thunk)
+  compose(
+    applyMiddleware(routerMiddleware(browserHistory), thunk),
+    autoRehydrate()
+  )
 );
+
+// begin periodically persisting the store
+persistStore(store);
 
 const history = syncHistoryWithStore(browserHistory, store);
 const muiTheme = getMuiTheme({
