@@ -28,6 +28,7 @@ const Cart = ({ cartItems, updateCartItem, removeCartItem }) => {
                       />
                     );
                   })}
+
                 </tbody>
               </StyledCartTable>
             : null}
