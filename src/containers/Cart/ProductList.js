@@ -13,9 +13,9 @@ const ProductList = ({ products, cartItems, updateCartItem }) => {
           <td>{item.title}</td>
           <td>{priceFormatter(item.price$)}</td>
           <td>{item.weight}</td>
-          <td><button onClick={() => updateCartItem(cartItems, item, 1)} >
+          <td><span className="icon" onClick={() => updateCartItem(cartItems, item, 1)} >
             <i className="fa fa-plus fa-lg" aria-hidden="true" />
-          </button></td>
+          </span></td>
         </tr>;
       })}
         </tbody>

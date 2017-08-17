@@ -1,28 +1,31 @@
 import React from "react";
 import PT from "prop-types";
 import { priceFormatter } from "src/utils/numeralFormats";
+import styled from "styled-components";
 
-const CartRow = ({ cartItems, item, updateCartItem, removeCartItem }) => {
+const CartRow = ({ cartItems, cartItem, updateCartItem, removeCartItem }) => {
+  const item = cartItem.item;
   return (
     <tr>
       <td>
-        <div className="update-num">
+        <UpdateNumDiv>
           <span
-            className="update-col"
+            className="update-col icon"
             onClick={() => updateCartItem(cartItems, item, 1)}
           >
             <i className="fa fa-plus fa-lg" aria-hidden="true" />
           </span>
           <span
-            className="update-col"
-            onClick={() => updateCartItem(cartItems, item, 1)}
+            className="update-col icon"
+            onClick={() => updateCartItem(cartItems, item, -1)}
           >
             <i className="fa fa-minus fa-lg" aria-hidden="true" />
           </span>
-        </div>
+        </UpdateNumDiv>
       </td>
       <td>
-        <i className="fa fa-leaf fa-3x" aria-hidden="true" />
+        <i className="fa fa-leaf fa-2x" aria-hidden="true" />
+        {cartItem.quantity} qty.
       </td>
       <td>
         <span>{item.provider}</span>
@@ -34,16 +37,21 @@ const CartRow = ({ cartItems, item, updateCartItem, removeCartItem }) => {
         <span>{item.weight}</span>
       </td>
       <td>
-        <button onClick={() => removeCartItem(cartItems, item)}>
-          <i className="fa fa-trash-o" aria-hidden="true" />
-        </button>
+        <span className="icon" onClick={() => removeCartItem(cartItems, item)}>
+          <i className="fa fa-trash-o fa-lg" aria-hidden="true" />
+        </span>
       </td>
     </tr>
   );
 };
 
+const UpdateNumDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
 CartRow.propTypes = {
-  item: PT.object.isRequired,
+  cartItem: PT.object.isRequired,
   cartItems: PT.array.isRequired,
   updateCartItem: PT.func.isRequired,
   removeCartItem: PT.func.isRequired

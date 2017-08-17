@@ -2,26 +2,26 @@ import React from "react";
 import { Container } from "src/components";
 import Helmet from "react-helmet";
 import { connect } from "react-redux";
-import ProductList from "./productList";
-import CartRow from "./cartRow";
+import ProductList from "./ProductList";
+import CartRow from "./CartRow";
 import { updateCartItem, removeCartItem } from "src/redux/cart";
 import { priceFormatter } from "src/utils/numeralFormats";
+import styled from "styled-components";
 
 const Cart = ({ cartItems, updateCartItem, removeCartItem }) => {
   return (
     <div>
       <Helmet title="Cart" />
       <Container>
-        <ProductList />
-        <div className="text-center">
+        <StyledContainer>
+          <ProductList />
           <table>
             <tbody>
               {cartItems.map(cartItem => {
-                const item = cartItem.item;
                 return (
                   <CartRow
-                    key={item.id}
-                    item={item}
+                    key={cartItem.id}
+                    cartItem={cartItem}
                     cartItems={cartItems}
                     updateCartItem={updateCartItem}
                     removeCartItem={removeCartItem}
@@ -30,11 +30,26 @@ const Cart = ({ cartItems, updateCartItem, removeCartItem }) => {
               })}
             </tbody>
           </table>
-        </div>
+        </StyledContainer>
       </Container>
     </div>
   );
 };
+
+const StyledContainer = styled.div`
+  .icon {
+    cursor: pointer;
+    color: #669e3a;
+    margin-left: 5px;
+  }
+  .icon:hover {
+     color: #578831;
+  }
+  
+  table {
+    border: 1px solid #000;
+  }
+`;
 
 const mapStateToProps = state => {
   return {
