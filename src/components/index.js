@@ -1,7 +1,5 @@
-import Container from "./container/Container";
-import Header from "./header";
+import Container from "./container";
 
 export {
   Container,
-  Header
 };

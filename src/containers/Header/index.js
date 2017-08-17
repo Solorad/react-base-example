@@ -1,7 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 
-const Header = () => {
+const Header = ({cartItems}) => {
   return (
     <StyledHeader>
       <div className="header-icon">
@@ -16,7 +17,7 @@ const Header = () => {
         </span>
         <span className="header-icon header-icon__cart">
           <i className="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
-          <span className="count">0</span>
+          <span className="count">{cartItems ? cartItems.length : 0}</span>
         </span>
       </div>
     </StyledHeader>
@@ -65,4 +66,10 @@ const StyledHeader = styled.header`
 `;
 
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    cartItems: state.cart.cartItems
+  };
+};
+
+export default connect(mapStateToProps, null)(Header);

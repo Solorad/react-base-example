@@ -1,6 +1,6 @@
 import React from "react";
 import Helmet from "react-helmet";
-import { Container } from "../../components";
+import { Container } from "src/components";
 import { Link } from "react-router";
 
 const NotFoundPage = () =>

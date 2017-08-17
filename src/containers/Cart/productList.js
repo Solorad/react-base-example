@@ -1,27 +1,33 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addItemToCart } from "../../redux/cart";
+import { updateCartItem } from "src/redux/cart";
+import { priceFormatter } from "src/utils/numeralFormats";
 
-const ProductList = ({ products, addItemToCart }) => {
+const ProductList = ({ products, cartItems, updateCartItem }) => {
   return (
-    <div>
+      <table>
+        <tbody>
       {products.map(item => {
-        <div key={item.id}>
-          <span>{item.provider}</span>
-          <span>{item.title}</span>
-          <span>{item.price$} $</span>
-          <span>{item.weight}</span>
-          <button onClick={() => addItemToCart(item)} />
-        </div>;
+        return <tr key={item.id} >
+          <td>{item.provider}</td>
+          <td>{item.title}</td>
+          <td>{priceFormatter(item.price$)}</td>
+          <td>{item.weight}</td>
+          <td><button onClick={() => updateCartItem(cartItems, item, 1)} >
+            <i className="fa fa-plus fa-lg" aria-hidden="true" />
+          </button></td>
+        </tr>;
       })}
-    </div>
+        </tbody>
+      </table>
   );
 };
 
 const mapStateToProps = state => {
   return {
-    products: state.products.items
+    products: state.products.items,
+    cartItems: state.cart.cartItems
   };
 };
 
-export default connect(mapStateToProps, { addItemToCart })(ProductList);
+export default connect(mapStateToProps, { updateCartItem })(ProductList);

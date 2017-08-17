@@ -1,4 +1,4 @@
-export const initValues = {
+const initValues = {
   items: [
     {
       id: 1,
