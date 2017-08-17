@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import ProductList from "./ProductList";
 import CartRow from "./CartRow";
 import { updateCartItem, removeCartItem } from "src/redux/cart";
-import { priceFormatter } from "src/utils/numeralFormats";
 import styled from "styled-components";
 
 const Cart = ({ cartItems, updateCartItem, removeCartItem }) => {
@@ -52,6 +51,7 @@ const StyledCartTable = styled.table`
   margin-top: 40px;
   border: 1px solid #969494;
   border-collapse: collapse;
+  width: 400px;
   
   td {
     border-bottom: 1px solid #969494;

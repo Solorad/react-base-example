@@ -4,8 +4,6 @@ import { applyMiddleware, compose, createStore } from "redux";
 import { persistStore, autoRehydrate } from "redux-persist";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import getMuiTheme from "material-ui/styles/getMuiTheme";
 import { browserHistory, Router } from "react-router";
 import { routerMiddleware, syncHistoryWithStore } from "react-router-redux";
 import routes from "./routes";
@@ -32,16 +30,11 @@ const store = createStore(
 persistStore(store);
 
 const history = syncHistoryWithStore(browserHistory, store);
-const muiTheme = getMuiTheme({
-  fontFamily: "ProximaNovaRegular"
-});
 
 render(
-  <MuiThemeProvider muiTheme={muiTheme}>
-    <Provider store={store}>
-      <Router history={history} routes={routes} />
-    </Provider>
-  </MuiThemeProvider>,
+  <Provider store={store}>
+    <Router history={history} routes={routes} />
+  </Provider>,
   document.getElementById("root")
 );
 registerServiceWorker();
