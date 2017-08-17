@@ -3,35 +3,34 @@ import { Container } from "src/components";
 import Helmet from "react-helmet";
 import { connect } from "react-redux";
 import ProductList from "./ProductList";
+import TotalInfoRow from "./TotalInfoRow";
 import CartRow from "./CartRow";
 import { updateCartItem, removeCartItem } from "src/redux/cart";
 import styled from "styled-components";
 
-const Cart = ({ cartItems, updateCartItem, removeCartItem }) => {
+const Cart = ({ cartItems, updateCartItem, removeCartItem, deliveryFee }) => {
   return (
     <div>
       <Helmet title="Cart" />
       <Container>
         <StyledContainer>
           <ProductList />
-          {cartItems && cartItems.length > 0
-            ? <StyledCartTable>
-                <tbody>
-                  {cartItems.map(cartItem => {
-                    return (
-                      <CartRow
-                        key={cartItem.id}
-                        cartItem={cartItem}
-                        cartItems={cartItems}
-                        updateCartItem={updateCartItem}
-                        removeCartItem={removeCartItem}
-                      />
-                    );
-                  })}
-
-                </tbody>
-              </StyledCartTable>
-            : null}
+          <StyledCartTable>
+            <tbody>
+              {cartItems.map(cartItem => {
+                return (
+                  <CartRow
+                    key={cartItem.id}
+                    cartItem={cartItem}
+                    cartItems={cartItems}
+                    updateCartItem={updateCartItem}
+                    removeCartItem={removeCartItem}
+                  />
+                );
+              })}
+              <TotalInfoRow cartItems={cartItems} deliveryFee={deliveryFee} />
+            </tbody>
+          </StyledCartTable>
         </StyledContainer>
       </Container>
     </div>
@@ -62,10 +61,9 @@ const StyledCartTable = styled.table`
 
 const mapStateToProps = state => {
   return {
-    cartItems: state.cart.cartItems
+    cartItems: state.cart.cartItems,
+    deliveryFee: state.cart.deliveryFee
   };
 };
 
-export default connect(mapStateToProps, { updateCartItem, removeCartItem })(
-  Cart
-);
+export default connect(mapStateToProps, { updateCartItem, removeCartItem })(Cart);

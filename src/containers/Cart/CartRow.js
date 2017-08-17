@@ -9,16 +9,10 @@ const CartRow = ({ cartItems, cartItem, updateCartItem, removeCartItem }) => {
     <tr>
       <UpdateNumTd>
         <div>
-          <span
-            className="plus-col"
-            onClick={() => updateCartItem(cartItems, item, 1)}
-          >
+          <span className="plus-col" onClick={() => updateCartItem(cartItems, item, 1)}>
             <i className="fa fa-plus icon" aria-hidden="true" />
           </span>
-          <span
-            className="minus-col"
-            onClick={() => updateCartItem(cartItems, item, -1)}
-          >
+          <span className="minus-col" onClick={() => updateCartItem(cartItems, item, -1)}>
             <i className="fa fa-minus icon" aria-hidden="true" />
           </span>
         </div>
@@ -35,10 +29,11 @@ const CartRow = ({ cartItems, cartItem, updateCartItem, removeCartItem }) => {
           <div className="info-row title"><span><b>{item.title}</b></span></div>
           <div>
             <span><b>{priceFormatter(item.price$)}</b></span>
-            {" "}
-            -
-            {" "}
-            <span>{item.weight}</span>
+            <span className="weight">
+              {" "}
+              -
+              {" "}{item.weight}
+            </span>
           </div>
         </InfoDiv>
       </td>
@@ -54,6 +49,7 @@ const CartRow = ({ cartItems, cartItem, updateCartItem, removeCartItem }) => {
 const UpdateNumTd = styled.td`
   border-right: 1px solid #969494;
   padding: 0;
+  width: 50px;
   
   div {
     display: flex;
@@ -100,6 +96,10 @@ const InfoDiv = styled.div`
     
     .title {
       font-size: 20px;
+    }
+    
+    .weight {
+      font-size: 12px;
     }
 `;
 

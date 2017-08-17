@@ -4,6 +4,7 @@ const UPDATE_CART = "UPDATE_CART";
 
 const initValues = {
   cartItems: [],
+  deliveryFee: 10
 };
 
 export default function cartReducer(state = initValues, action) {
